@@ -4,6 +4,9 @@ jdk:
   - oraclejdk9
 dist: trusty
 
+services:
+  - docker
+
 env:
   matrix:
   - COVERAGE=0.057 BUILD_TARGET=./monolithic/ui
@@ -27,6 +30,6 @@ after_sucess:
 
 deploy:
   provider: script
-  script: bash -c "echo \"${DOCKER_PASSWORD}\" | docker login --username \"${DOCKER_LOGIN}\" --password-stdin"
+  script: ./script/deploy.sh
   on:
     all_branches: true
